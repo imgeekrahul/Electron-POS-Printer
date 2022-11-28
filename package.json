@@ -1,0 +1,17 @@
+{
+  "name": "electron",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron . || npm start",
+    "dev": "electron . || node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "electron-pos-printer": "^1.3.6"
+  }
+}

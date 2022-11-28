@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Document</title>
+    <style>
+        body {background-color: white; height: 100%; width: 100%;}
+    </style>
+</head>
+<body>
+    <button onclick="printData()">Print</button>
+</body>
+<script>
+    const {ipcRenderer} = require("electron");
+    const a = [{
+        orange: 5,
+        mango: 6
+    }, {
+        orange: 8,
+        mango: 9
+    }, {
+        orange: 10,
+        mango: 12
+    }];
+
+    var arr = []
+    var darr = []
+
+    for(var i=0; i<a.length; i++) {
+        for(var j=i; j==i; j++) {
+            arr.push(i+1, a[j].orange, a[j].mango)
+            darr.push(Array.from(arr))
+        }
+        if(i == (a.length - 1)){
+            break;
+        }
+        arr.splice(0, 3);
+    }
+    
+    var storename = "Gupta Store";
+    var address = "Plot No.-9, South city-II, Gurgaon, Haryana";
+    var city = "Gurgaon";
+    var state = "Haryana";
+    var pincode = "122018";
+    var email = "rahul124@gmail.com";
+    var phone = "7979064070";
+    
+    const data = [
+    {
+        type: 'image',
+        url: 'https://one24store.com/images/one24_logo.png',     // file path
+        position: 'center',                                  // position of image: 'left' | 'center' | 'right'
+        width: '160px',                                           // width of image in px; default: auto
+        height: '25px',                                          // width of image in px; default: 50 or '50px'
+    },
+    {
+        type: 'text',                                       // 'text' | 'barCode' | 'qrCode' | 'image' | 'table
+        value: 'Contact Info',
+        style: {margin: "20px 0 0 0", fontWeight: "700", fontSize: "19px"},
+    },
+    {
+        type: 'text',                                       // 'text' | 'barCode' | 'qrCode' | 'image' | 'table
+        value: storename,
+        style: {margin: "20px 0 0 0", fontWeight: "700", fontSize: "17px"},
+    },
+    {
+        type: 'text',                                       // 'text' | 'barCode' | 'qrCode' | 'image' | 'table
+        value: 'Address : '+ address +', '+ city +', '+ state +', '+ pincode,
+        style: {fontWeight: "500", fontSize: "13px"},
+    },
+    // {
+    //     type: 'text',                                       // 'text' | 'barCode' | 'qrCode' | 'image' | 'table
+    //     value: 'City :',
+    //     style: {fontWeight: "700", fontSize: "13px"},
+    // },
+    // {
+    //     type: 'text',                                       // 'text' | 'barCode' | 'qrCode' | 'image' | 'table
+    //     value: 'State :',
+    //     style: {fontWeight: "700", fontSize: "13px"},
+    // },
+    // {
+    //     type: 'text',                                       // 'text' | 'barCode' | 'qrCode' | 'image' | 'table
+    //     value: 'Pincode :',
+    //     style: {fontWeight: "700", fontSize: "13px"},
+    // },
+    {
+        type: 'text',                                       // 'text' | 'barCode' | 'qrCode' | 'image' | 'table
+        value: 'Email : '+ email,
+        style: {fontWeight: "500", fontSize: "13px"},
+    },
+    {
+        type: 'text',                                       // 'text' | 'barCode' | 'qrCode' | 'image' | 'table
+        value: 'Phone : '+ phone,
+        color: '#ddd',
+        style: {fontWeight: "500", fontSize: "13px"},
+    },
+    {
+        type: 'table',
+        style: { margin: "20px 0", border: '1px solid #ddd'},
+        tableHeader: ['Item', 'Qty', 'Sub Total'],
+        tableBody: darr,
+        tableHeaderStyle: { backgroundColor: '#000', color: '#000'},
+        tableBodyStyle: {'border': '0.5px solid #ddd'},
+        tableFooterStyle: {backgroundColor: '#000', color: 'white'},
+    },
+    {
+        type: 'text',                                       // 'text' | 'barCode' | 'qrCode' | 'image' | 'table
+        value: 'Thank You!! Please visit again',
+        style: {fontWeight: "700", textAlign: 'center', fontSize: "13px"}
+    },
+    {
+        type: 'text',                                       // 'text' | 'barCode' | 'qrCode' | 'image' | 'table
+        value: 'SHARE YOUR EXPERIENCE',
+        style: {fontWeight: "700", textAlign: 'center', fontSize: "15px"}
+    },
+    {
+        type: 'qrCode',
+        value: 'https://github.com/Hubertformin/electron-pos-printer',
+        height: 55,
+        width: 55,
+        position: 'center'
+    },
+    {
+        type: 'text',                                       // 'text' | 'barCode' | 'qrCode' | 'image' | 'table
+        value: 'Scan QR code for feedback',
+        style: {fontWeight: "700", textAlign: 'center', fontSize: "13px"}
+    },
+    {
+        type: 'text',                                       // 'text' | 'barCode' | 'qrCode' | 'image' | 'table
+        value: 'Phone: +91 7352020228',
+        style: {fontWeight: "700", textAlign: 'center', fontSize: "13px"}
+    },
+    {
+        type: 'text',                                       // 'text' | 'barCode' | 'qrCode' | 'image' | 'table
+        value: 'Email: support@one24store.com',
+        style: {fontWeight: "700", textAlign: 'center', fontSize: "13px"}
+    },
+    
+    ];
+
+    function printData() {
+        const {ipcRenderer} = require('electron')
+        ipcRenderer.send('print', JSON.stringify(data)); 
+        
+    }
+</script>
+</html>
